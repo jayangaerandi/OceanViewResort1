@@ -21,13 +21,16 @@
 <p>Role: <%= user.getRole() %></p>
 
 <br>
-<a href="addGuest.jsp">Register Guest</a><br><br>
+<a href="addGuest.jsp">Register Guest</a>
 
 <br>
 <a href="reservationForm">Create Reservation</a>
 
 <br>
 <a href="reservations">View Reservations</a>
+
+<br>
+<a href="searchReservation.jsp">Generate Reservation Invoice</a>
 
 <br>
 <a href="logout">Logout</a>
