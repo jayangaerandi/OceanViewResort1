@@ -46,25 +46,34 @@ public class LoginServlet extends HttpServlet {
 
             User user = userService.login(username, password);
 
-            System.out.println("User found in DB: " + user);
-
             if (user != null) {
-
-                System.out.println("Login SUCCESS for: " + user.getUsername());
 
                 HttpSession session = request.getSession(true);
                 session.setAttribute("loggedUser", user);
 
-                response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
+                String role = user.getRole();
+
+                if ("Admin".equalsIgnoreCase(role)) {
+
+                    response.sendRedirect(request.getContextPath() + "/adminDashboard.jsp");
+
+                } else if ("Manager".equalsIgnoreCase(role)) {
+
+                    response.sendRedirect(request.getContextPath() + "/managerDashboard.jsp");
+
+                } else if ("Receptionist".equalsIgnoreCase(role)) {
+
+                    response.sendRedirect(request.getContextPath() + "/receptionDashboard.jsp");
+
+                } else {
+
+                    response.sendRedirect(request.getContextPath() + "/login.jsp");
+                }
 
             } else {
 
-                System.out.println("Login FAILED - user is null");
-
-                request.setAttribute("errorMessage",
-                        "Invalid username or password");
-                request.getRequestDispatcher("login.jsp")
-                        .forward(request, response);
+                request.setAttribute("errorMessage", "Invalid username or password");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
