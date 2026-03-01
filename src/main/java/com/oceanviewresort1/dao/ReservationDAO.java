@@ -11,4 +11,6 @@ public interface ReservationDAO {
     Reservation getReservationByNumber(String reservationNumber) throws Exception;
 
     List<Reservation> getAllReservations() throws Exception;
+
+    boolean createReservation(Reservation reservation);
 }

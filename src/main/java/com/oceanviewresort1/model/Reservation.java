@@ -91,4 +91,33 @@ public class Reservation {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    /* ---------------------------
+       Helper methods for IDs
+       --------------------------- */
+
+    public void setGuestId(int guestId) {
+        if (this.guest == null) {
+            this.guest = new Guest();
+        }
+        this.guest.setGuestId(guestId);
+    }
+
+    public void setRoomId(int roomId) {
+        if (this.room == null) {
+            this.room = new Room();
+        }
+        this.room.setRoomId(roomId);
+    }
+
+    public int getRoomId() {
+        if (room != null) {
+            return room.getRoomId();
+        }
+        return 0;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalAmount = totalPrice;
+    }
 }

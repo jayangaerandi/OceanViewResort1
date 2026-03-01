@@ -18,7 +18,16 @@
 
 <h2>Welcome, <%= user.getUsername() %></h2>
 
-<p>Your Role: <%= user.getRole() %></p>
+<p>Role: <%= user.getRole() %></p>
+
+<br>
+<a href="addGuest.jsp">Register Guest</a><br><br>
+
+<br>
+<a href="addReservation.jsp">Create Reservation</a>
+
+<br>
+<a href="reservations">View Reservations</a>
 
 <br>
 <a href="logout">Logout</a>

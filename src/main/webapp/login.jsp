@@ -21,9 +21,6 @@
 
 <br>
 
-<span style="color:red;">
-    ${errorMessage}
-</span>
 
 </body>
 </html>

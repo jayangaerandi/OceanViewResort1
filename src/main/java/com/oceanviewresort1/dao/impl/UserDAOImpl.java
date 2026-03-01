@@ -13,7 +13,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User login(String username, String password) throws Exception {
 
-        String sql = "SELECT * FROM Users WHERE username=? AND password=?";
+        String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -25,12 +25,16 @@ public class UserDAOImpl implements UserDAO {
 
             if (rs.next()) {
                 User user = new User();
+
                 user.setUserId(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
                 user.setRole(rs.getString("role"));
+
                 return user;
             }
         }
+
         return null;
     }
 
