@@ -15,6 +15,10 @@
 <tr>
     <th>ID</th>
     <th>Reservation Number</th>
+    <th>Guest Name</th>
+    <th>Room</th>
+    <th>Check-In</th>
+    <th>Check-Out</th>
     <th>Total Amount</th>
     <th>Status</th>
 </tr>
@@ -30,6 +34,10 @@
 <tr>
     <td><%= r.getReservationId() %></td>
     <td><%= r.getReservationNumber() %></td>
+    <td><%= r.getGuest().getFullName() %></td>
+    <td><%= r.getRoom().getRoomNumber() %></td>
+    <td><%= r.getCheckIn() %></td>
+    <td><%= r.getCheckOut() %></td>
     <td><%= r.getTotalAmount() %></td>
     <td><%= r.getStatus() %></td>
 </tr>

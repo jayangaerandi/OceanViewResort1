@@ -95,11 +95,16 @@ public class ReservationDAOImpl implements ReservationDAO {
 
         List<Reservation> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM Reservations";
+        String sql = "SELECT r.reservation_id, r.reservation_number, r.check_in, r.check_out, " +
+                "r.total_amount, r.status, g.full_name, rm.room_number " +
+                "FROM Reservations r " +
+                "JOIN Guests g ON r.guest_id = g.guest_id " +
+                "JOIN Rooms rm ON r.room_id = rm.room_id";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -107,8 +112,20 @@ public class ReservationDAOImpl implements ReservationDAO {
 
                 reservation.setReservationId(rs.getInt("reservation_id"));
                 reservation.setReservationNumber(rs.getString("reservation_number"));
+                reservation.setCheckIn(rs.getDate("check_in").toLocalDate());
+                reservation.setCheckOut(rs.getDate("check_out").toLocalDate());
                 reservation.setTotalAmount(rs.getDouble("total_amount"));
                 reservation.setStatus(rs.getString("status"));
+
+                // Guest
+                Guest guest = new Guest();
+                guest.setFullName(rs.getString("full_name"));
+                reservation.setGuest(guest);
+
+                // Room
+                Room room = new Room();
+                room.setRoomNumber(rs.getString("room_number"));
+                reservation.setRoom(room);
 
                 list.add(reservation);
             }
