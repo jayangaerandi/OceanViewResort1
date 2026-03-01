@@ -57,24 +57,25 @@ public class GuestDAOImpl implements GuestDAO {
     @Override
     public List<Guest> getAllGuests() throws Exception {
 
-        List<Guest> guestList = new ArrayList<>();
+        List<Guest> guests = new ArrayList<>();
+
         String sql = "SELECT * FROM Guests";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = stmt.executeQuery();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
+
                 Guest guest = new Guest();
+
                 guest.setGuestId(rs.getInt("guest_id"));
                 guest.setFullName(rs.getString("full_name"));
-                guest.setAddress(rs.getString("address"));
-                guest.setContactNumber(rs.getString("contact_number"));
-                guest.setEmail(rs.getString("email"));
-                guestList.add(guest);
+
+                guests.add(guest);
             }
         }
-        return guestList;
+
+        return guests;
     }
 }

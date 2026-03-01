@@ -24,7 +24,7 @@
 <a href="addGuest.jsp">Register Guest</a><br><br>
 
 <br>
-<a href="addReservation.jsp">Create Reservation</a>
+<a href="reservationForm">Create Reservation</a>
 
 <br>
 <a href="reservations">View Reservations</a>
