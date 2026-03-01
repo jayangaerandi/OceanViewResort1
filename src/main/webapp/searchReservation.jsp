@@ -1,3 +1,4 @@
+<%@ page import="com.oceanviewresort1.model.User" %>
 <html>
 <head>
 <title>Search Reservation</title>
@@ -28,7 +29,26 @@
 
 <br>
 
-<a href="dashboard.jsp">Back to Dashboard</a>
+<%
+User user = (User) session.getAttribute("loggedUser");
 
+String dashboard = "login.jsp";
+
+if(user != null){
+
+    if("Admin".equalsIgnoreCase(user.getRole())){
+        dashboard = "adminDashboard.jsp";
+    }
+    else if("Manager".equalsIgnoreCase(user.getRole())){
+        dashboard = "managerDashboard.jsp";
+    }
+    else if("Receptionist".equalsIgnoreCase(user.getRole())){
+        dashboard = "receptionDashboard.jsp";
+    }
+}
+%>
+
+<br><br>
+<a href="<%= dashboard %>">Back to Dashboard</a>
 </body>
 </html>

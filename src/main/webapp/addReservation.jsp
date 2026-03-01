@@ -1,5 +1,5 @@
-<%@ page import="java.util.List" %>
 <%@ page import="com.oceanviewresort1.model.User" %>
+<%@ page import="java.util.List" %>
 <%@ page import="com.oceanviewresort1.model.Guest" %>
 <%@ page import="com.oceanviewresort1.model.Room" %>
 
@@ -103,7 +103,24 @@ if (rooms != null) {
 
 <br>
 
-<a href="dashboard.jsp">Back to Dashboard</a>
+<%
+String dashboard = "login.jsp";
 
+if(user != null){
+
+    if("Admin".equalsIgnoreCase(user.getRole())){
+        dashboard = "adminDashboard.jsp";
+    }
+    else if("Manager".equalsIgnoreCase(user.getRole())){
+        dashboard = "managerDashboard.jsp";
+    }
+    else if("Receptionist".equalsIgnoreCase(user.getRole())){
+        dashboard = "receptionDashboard.jsp";
+    }
+}
+%>
+
+<br><br>
+<a href="<%= dashboard %>">Back to Dashboard</a>
 </body>
 </html>

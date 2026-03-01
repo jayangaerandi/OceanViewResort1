@@ -1,7 +1,9 @@
 <%@ page import="com.oceanviewresort1.model.Reservation" %>
+<%@ page import="com.oceanviewresort1.model.User" %>
 
 <%
 Reservation r = (Reservation) request.getAttribute("reservation");
+User user = (User) session.getAttribute("loggedUser");
 %>
 
 <html>
@@ -58,7 +60,25 @@ Reservation r = (Reservation) request.getAttribute("reservation");
 
 <br><br>
 
-<a href="dashboard.jsp">Back to Dashboard</a>
+<%
+String dashboard = "login.jsp";
+
+if(user != null){
+
+    if("Admin".equalsIgnoreCase(user.getRole())){
+        dashboard = "adminDashboard.jsp";
+    }
+    else if("Manager".equalsIgnoreCase(user.getRole())){
+        dashboard = "managerDashboard.jsp";
+    }
+    else if("Receptionist".equalsIgnoreCase(user.getRole())){
+        dashboard = "receptionDashboard.jsp";
+    }
+}
+%>
+
+<br><br>
+<a href="<%= dashboard %>">Back to Dashboard</a>
 
 </body>
 </html>

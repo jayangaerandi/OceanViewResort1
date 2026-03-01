@@ -1,4 +1,5 @@
 <%@ page import="com.oceanviewresort1.model.User" %>
+
 <%@ page session="true" %>
 
 <%
@@ -55,7 +56,26 @@
 
 
 <br><br>
-<a href="dashboard.jsp">Back to Dashboard</a>
+<%
+
+String dashboard = "login.jsp";
+
+if(user != null){
+
+    if("Admin".equalsIgnoreCase(user.getRole())){
+        dashboard = "adminDashboard.jsp";
+    }
+    else if("Manager".equalsIgnoreCase(user.getRole())){
+        dashboard = "managerDashboard.jsp";
+    }
+    else if("Receptionist".equalsIgnoreCase(user.getRole())){
+        dashboard = "receptionDashboard.jsp";
+    }
+}
+%>
+
+<br><br>
+<a href="<%= dashboard %>">Back to Dashboard</a>
 
 </body>
 </html>

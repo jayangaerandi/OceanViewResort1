@@ -22,7 +22,7 @@ if (user == null || !user.getRole().equalsIgnoreCase("Receptionist")) {
 
 <ul>
 <li><a href="reservationForm">Create Reservation</a></li>
-<li><a href="registerGuest.jsp">Register Guest</a></li>
+<li><a href="addGuest.jsp">Register Guest</a></li>
 <li><a href="searchReservation.jsp">Generate Invoice</a></li>
 </ul>
 
