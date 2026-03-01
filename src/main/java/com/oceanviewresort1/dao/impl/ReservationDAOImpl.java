@@ -7,6 +7,7 @@ import com.oceanviewresort1.model.Reservation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,5 +94,33 @@ public class ReservationDAOImpl implements ReservationDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public boolean isRoomAvailable(int roomId, LocalDate checkIn, LocalDate checkOut) {
+
+        String sql = "SELECT COUNT(*) FROM Reservations " +
+                "WHERE room_id = ? " +
+                "AND status = 'CONFIRMED' " +
+                "AND (check_in < ? AND check_out > ?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, roomId);
+            stmt.setDate(2, java.sql.Date.valueOf(checkOut));
+            stmt.setDate(3, java.sql.Date.valueOf(checkIn));
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) == 0;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
